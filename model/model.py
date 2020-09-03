@@ -15,7 +15,7 @@ class PANNsCNN14Att(nn.Module):
         amin = 1e-10
         top_db = None
         self.interpolate_ratio = 32  # Downsampled ratio
-
+        self.training = True
         # Spectrogram extractor
         self.spectrogram_extractor = Spectrogram(
             n_fft=window_size,
