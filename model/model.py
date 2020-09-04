@@ -1,7 +1,10 @@
 import torch
 from torch import nn
-from .model_blocks import *
-from src.transforms import *
+import torch.nn.functional as F
+from model.model_blocks import init_layer, init_bn, interpolate, pad_framewise_output, _resnet_conv3x3, _resnet_conv1x1
+from model.model_blocks import ConvBlock, AttBlock, _ResnetBasicBlock, _ResnetBottleneck, _ResNet
+from src import *
+# print(dir(mbs))
 
 class PANNsCNN14Att(nn.Module):
     def __init__(self, sample_rate: int, window_size: int, hop_size: int,

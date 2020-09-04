@@ -13,7 +13,6 @@ def init_bn(bn):
     bn.bias.data.fill_(0.)
     bn.weight.data.fill_(1.0)
 
-
 def interpolate(x: torch.Tensor, ratio: int):
     """Interpolate data in time domain. This is used to compensate the
     resolution reduction in downsampling of a CNN.
@@ -28,7 +27,6 @@ def interpolate(x: torch.Tensor, ratio: int):
     upsampled = x[:, :, None, :].repeat(1, 1, ratio, 1)
     upsampled = upsampled.reshape(batch_size, time_steps * ratio, classes_num)
     return upsampled
-
 
 def pad_framewise_output(framewise_output: torch.Tensor, frames_num: int):
     """Pad framewise_output to the same length as input frames. The pad value
@@ -52,7 +50,6 @@ def _resnet_conv3x3(in_planes, out_planes):
     #3x3 convolution with padding
     return nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=1,
                      padding=1, groups=1, bias=False, dilation=1)
-
 
 def _resnet_conv1x1(in_planes, out_planes):
     #1x1 convolution
@@ -107,7 +104,6 @@ class ConvBlock(nn.Module):
 
         return x
 
-
 class AttBlock(nn.Module):
     def __init__(self,
                  in_features: int,
@@ -153,7 +149,6 @@ class AttBlock(nn.Module):
             return x
         elif self.activation == 'sigmoid':
             return torch.sigmoid(x)
-
 
 class _ResnetBasicBlock(nn.Module):
     expansion = 1
@@ -212,7 +207,6 @@ class _ResnetBasicBlock(nn.Module):
 
         return out
 
-
 class _ResnetBottleneck(nn.Module):
     expansion = 4
 
@@ -270,9 +264,7 @@ class _ResnetBottleneck(nn.Module):
         out = self.relu(out)
 
         return out
-
-
-        
+  
 class _ResNet(nn.Module):
     def __init__(self, block, layers, zero_init_residual=False,
                  groups=1, width_per_group=64, replace_stride_with_dilation=None,
